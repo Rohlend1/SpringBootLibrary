@@ -30,6 +30,8 @@ public class Book {
     @NotNull(message = "Author's name should not be null")
     @Column(name = "year")
     private int year;
+    @Column(name = "rate")
+    private double rate;
 
     @ManyToOne
     @JoinColumn(name = "owner_id",referencedColumnName = "person_id")
@@ -38,11 +40,23 @@ public class Book {
     @Column(name = "date_of_taking")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfTaking;
+
+    @Column(name="number_of_rates")
+    private int numberOfRates;
     @Transient
     private boolean isExpired;
     @Transient
     private String ownerName;
 
+    public Book() {
+    }
+    public Book(String name, String author, int year, double rate, Date dateOfTaking) {
+        this.name = name;
+        this.author = author;
+        this.year = year;
+        this.rate = rate;
+        this.dateOfTaking = dateOfTaking;
+    }
     public String getOwnerName() {
         return ownerName;
     }
@@ -58,14 +72,6 @@ public class Book {
     public void setExpired(boolean expired) {
         isExpired = expired;
     }
-
-    public Book(String name, String author, int year, Date dateOfTaking) {
-        this.name = name;
-        this.author = author;
-        this.year = year;
-        this.dateOfTaking = dateOfTaking;
-    }
-
     public void checkTime(){
         Date currentDate = new Date();
         long diffInMillies = Math.abs(currentDate.getTime() - dateOfTaking.getTime());
@@ -121,7 +127,20 @@ public class Book {
         this.year = year;
     }
 
-    public Book() {
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public int getNumberOfRates() {
+        return numberOfRates;
+    }
+
+    public void setNumberOfRates(int numberOfRates) {
+        this.numberOfRates = numberOfRates;
     }
 
     @Override
@@ -131,7 +150,11 @@ public class Book {
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +
+                ", rate=" + rate +
                 ", owner=" + owner +
+                ", dateOfTaking=" + dateOfTaking +
+                ", isExpired=" + isExpired +
+                ", ownerName='" + ownerName + '\'' +
                 '}';
     }
 }

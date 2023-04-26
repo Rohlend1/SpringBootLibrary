@@ -45,7 +45,21 @@ public class BookService {
     @Transactional
     public void edit(int id,Book book){
         book.setId(id);
-        bookRepository.save(book);
+        if(book.getRate() != 0) {
+            Book existingBook = findById(id);
+//            System.out.println(book.getRate());
+            existingBook.setNumberOfRates(existingBook.getNumberOfRates()+1);
+            System.out.println((book.getRate()+existingBook.getRate())/existingBook.getNumberOfRates());
+            existingBook.setRate((book.getRate()+existingBook.getRate())/existingBook.getNumberOfRates());
+            existingBook.setName(book.getName());
+            existingBook.setDateOfTaking(book.getDateOfTaking());
+//            existingBook.setOwnerName(book.getOwnerName());
+//            existingBook.setExpired(book.isExpired());
+            existingBook.setAuthor(book.getAuthor());
+            existingBook.setYear(book.getYear());
+            bookRepository.save(existingBook);
+        }
+        else bookRepository.save(book);
     }
 
     @Transactional
@@ -72,6 +86,12 @@ public class BookService {
     public List<Book> findAllSortByYear(){
         List<Book> books = findAll();
         books.sort(Comparator.comparingInt(Book::getYear));
+        return books;
+    }
+
+    public List<Book> findAllSortByRate(){
+        List<Book> books = findAll();
+        books.sort(Comparator.comparingDouble(Book::getRate));
         return books;
     }
 

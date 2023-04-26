@@ -45,7 +45,7 @@
 <h2 th:if="${found != null}">Results:</h2>
 <div th:each="book : ${found}" th:if="${found.size()!=0}">
     <div th:if="${book.owner != null}">
-        <p th:text="${book.name}+', '+ ${book.author} + ', ' + ${book.year}"></p>
+        <p th:text="${book.name}+', '+ ${book.author} + ', ' + ${book.year}+' average rate: '+${book.rate}"></p>
         <p th:text="${book.owner.fullName}+' has this book now'"></p>
     </div>
     <div th:if="${book.owner == null}">

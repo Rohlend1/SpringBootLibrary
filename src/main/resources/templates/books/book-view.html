@@ -29,7 +29,7 @@
     </style>
 </head>
 <body>
-<a style="font-weight: bolder" class="font" th:text="${book.name +', '+ book.author +', '+book.year}"></a>
+<a style="font-weight: bolder" class="font" th:text="${book.name +', '+ book.author +', '+book.year+' average rate: '+book.rate}"></a>
 <br/>
 <a style="font-weight: 540" class="font" th:if="${person == null}">
     This book is free. Who should it be assigned to?
