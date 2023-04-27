@@ -4,9 +4,24 @@
     <meta charset="UTF-8">
     <title>Books</title>
     <style>
+        .button {
+            border: none;
+            padding: 8px 12px;
+            background-color: #FFFFFF;
+            color: #000000;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 4px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .button:active {
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+            transform: scale(0.98);
+        }
+        /* Стили для кнопки "Edit" */
         .font{
             font-size: 14px;
-            font-weight: bold;
             font-family: "Trebuchet MS",sans-serif;
         }
     </style>
@@ -18,5 +33,8 @@
 </div>
 <hr/>
 <a class="font" th:href="@{books/new}">Add new book</a>
+<form th:method="GET" th:action="@{/}">
+    <input class="font button" type="submit" value="Back">
+</form>
 </body>
 </html>
