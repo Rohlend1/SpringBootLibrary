@@ -24,6 +24,9 @@
             font-size: 14px;
             font-family: "Trebuchet MS",sans-serif;
         }
+        .indent {
+            margin-top: 10px; /* добавление отступа снизу */
+        }
     </style>
 </head>
 <body>
@@ -33,8 +36,14 @@
 </div>
 <hr/>
 <a class="font" th:href="@{books/new}">Add new book</a>
-<form th:method="GET" th:action="@{/}">
-    <input class="font button" type="submit" value="Back">
-</form>
+<div>
+    <form class="indent" th:method="GET" th:action="@{/}">
+        <input class="font button" type="submit" value="Back">
+    </form>
+    <form class="indent" th:method="GET" th:action="@{/books}">
+        <input class="font button" type="hidden" name="sort_by_year" value="true">
+        <input class="font button" type="submit" value="Sort">
+    </form>
+</div>
 </body>
 </html>
