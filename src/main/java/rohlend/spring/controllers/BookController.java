@@ -2,7 +2,6 @@ package rohlend.spring.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,16 +29,15 @@ public class BookController {
     }
     @GetMapping()
     public String mainPage(Model model,
-               @RequestParam(name = "sort_by_year",required = false)boolean sort,
-               @RequestParam(name="page",required = false)Integer page,
-               @RequestParam(name = "books_per_page",required = false)Integer booksPerPage){
+               @RequestParam(name = "sort_by_year",required = false)boolean sortByYear,
+               @RequestParam(name = "sort_by_rate",required = false)boolean sortByRate){
         List<Book> books;
-        if(sort && (page == null || booksPerPage == null)){
+        if(sortByYear){
             books = bookService.findAllSortByYear();
         }
-        else if(page == null || booksPerPage == null) books = bookService.findAll();
+        else if(sortByRate) books = bookService.findAllSortByRate();
         else{
-           books = bookService.pagination(page,booksPerPage,sort);
+           books = bookService.findAll();
         }
         model.addAttribute("books",books);
         return "books/book-main";

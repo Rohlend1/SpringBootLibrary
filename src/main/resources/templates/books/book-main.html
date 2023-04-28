@@ -36,13 +36,13 @@
 </div>
 <hr/>
 <a class="font" th:href="@{books/new}">Add new book</a>
-<div>
-    <form class="indent" th:method="GET" th:action="@{/}">
-        <input class="font button" type="submit" value="Back">
-    </form>
-    <form class="indent" th:method="GET" th:action="@{/books}">
+<div style="display: flex;">
+    <form class="indent" th:method="GET" th:action="@{/books}" >
         <input class="font button" type="hidden" name="sort_by_year" value="true">
         <input class="font button" type="submit" value="Sort">
+    </form>
+    <form class="indent" th:method="GET" th:action="@{/}" style="margin-left: 10px;">
+        <input class="font button" type="submit" value="Back">
     </form>
 </div>
 </body>

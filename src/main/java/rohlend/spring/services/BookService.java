@@ -1,8 +1,6 @@
 package rohlend.spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rohlend.spring.entities.Book;
@@ -76,21 +74,14 @@ public class BookService {
         bookRepository.save(book);
     }
 
-    public List<Book> pagination(int page,int booksPerPage,boolean sort){
-        List<Book> books;
-        if (sort) books = bookRepository.findAll(PageRequest.of(page,booksPerPage, Sort.by("year").ascending())).getContent();
-        else books=bookRepository.findAll(PageRequest.of(page,booksPerPage)).getContent();
-        return books;
-    }
-
     public List<Book> findAllSortByYear(){
-        List<Book> books = findAll();
+        List<Book> books=bookRepository.findAll();
         books.sort(Comparator.comparingInt(Book::getYear));
         return books;
     }
 
     public List<Book> findAllSortByRate(){
-        List<Book> books = findAll();
+        List<Book> books = bookRepository.findAll();
         books.sort(Comparator.comparingDouble(Book::getRate));
         return books;
     }
